@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import React from 'react';
@@ -24,9 +23,11 @@ class App extends React.Component {
   getCityData = async (e) => {
     e.preventDefault();
 
+    try {
+      let url = 
+    }
 
 
-    
 
   }
 
