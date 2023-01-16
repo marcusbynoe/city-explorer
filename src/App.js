@@ -37,44 +37,44 @@ class App extends React.Component {
 
 
 
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        error: true,
+        errorMessage: error.message
+      })
+
+
     }
 
-  } catch(error) {
-    console.log(error);
-    this.setState({
-      error: true,
-      errorMessage: error.message
-    })
   }
 
-}
 
 
 
 
 
 
+  render() {
+    return (
+      <>
+        <h1>API Location Calls</h1>
 
-render() {
-  return (
-    <>
-      <h1>API Location Calls</h1>
+        <form>
+          <label htmlFor="">Search for a City!
+            <input type="text" onInput={this.handleInput} />
+            <button type='submit'>Explore</button>
+          </label>
 
-      <form>
-        <label htmlFor="">Search for a City!
-          <input type="text" onInput={this.handleInput} />
-          <button type='submit'>Explore</button>
-        </label>
-
-      </form>
-
+        </form>
 
 
-    </>
+
+      </>
 
 
-  )
-}
+    )
+  }
 
 
 export default App;
