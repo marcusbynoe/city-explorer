@@ -1,6 +1,6 @@
 # Project Name
 
-**Author**: Your Name Goes Here
+**Author**: Marcus Bynoe
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
@@ -20,12 +20,12 @@
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-Name of feature: ________________________________
+Name of feature: Location API
 
 Estimate of time needed to complete: 2 and a half hours
 
 Start time: 3:20pm
 
-Finish time: _____
+Finish time: 8:39pm (took a dinner break)
 
-Actual time needed to complete: _____
+Actual time needed to complete: Incomplete
