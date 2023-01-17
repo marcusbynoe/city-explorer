@@ -24,7 +24,7 @@ class App extends React.Component {
     e.preventDefault();
 
     try {
-      let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_API_KEY}&q=${this.state.city}&format=json`
+      let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_API_KEY}&q=${this.state.city}&format=json&limit=1`
 
       console.log(url);
       let cityDataFromAxios = await axios.get(url)
@@ -60,7 +60,7 @@ class App extends React.Component {
       <>
         <h1>API Location Calls</h1>
 
-        <form>
+        <form onSubmit={this.getCityData}>
           <label htmlFor="">Search for a City!
             <input type="text" onInput={this.handleInput} />
             <button type='submit'>Explore</button>
@@ -68,11 +68,15 @@ class App extends React.Component {
 
         </form>
 
-        {
+        <p>{this.state.cityData.display_name}</p>
+        <p>Latitude: {this.state.cityData.lat}</p>
+        <p>Longitude: {this.state.cityData.lon}</p>
+        {/* {
           this.state.error
           ? <p>{this.state.errorMessage}</p>
           : <p>{this.state.cityData.display_name}</p>
-        }
+        } */}
+
 
       </>
 
