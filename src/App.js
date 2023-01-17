@@ -8,6 +8,7 @@ class App extends React.Component {
     this.state = {
       city: '',
       cityData: [],
+      cityMap: '',
       error: false,
       errorMessage: ''
     }
@@ -49,7 +50,23 @@ class App extends React.Component {
 
   }
 
+ getMapData = async (e) => {
 
+  try {
+    let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityMap.lat},${this.state.cityData.lon}&zoom=11&size=600x600&format=jpeg`
+
+    this.setState({
+      cityMap: mapUrl,
+    })
+  } catch (error) {
+    console.log(error);
+    this.setState({
+      error: true,
+      errorMessage: error.message
+    })
+  }
+
+ }
 
 
 
@@ -68,9 +85,12 @@ class App extends React.Component {
 
         </form>
 
-        <p>{this.state.cityData.display_name}</p>
+        <p>City: {this.state.cityData.display_name}</p>
         <p>Latitude: {this.state.cityData.lat}</p>
         <p>Longitude: {this.state.cityData.lon}</p>
+        {this.state.cityMap}
+        <img src={this.state.cityMap} alt='map' />
+
         {/* {
           this.state.error
           ? <p>{this.state.errorMessage}</p>
