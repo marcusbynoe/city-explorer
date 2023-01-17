@@ -68,7 +68,11 @@ class App extends React.Component {
 
         </form>
 
-
+        {
+          this.state.error
+          ? <p>{this.state.errorMessage}</p>
+          : <p>{this.state.cityData.display_name}</p>
+        }
 
       </>
 
