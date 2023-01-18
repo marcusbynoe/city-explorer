@@ -11,7 +11,9 @@ class App extends React.Component {
       cityData: [],
       cityMap: '',
       error: false,
-      errorMessage: ''
+      errorMessage: '',
+      weatherData: [],
+      showWeather: false
     }
   }
 
@@ -52,21 +54,30 @@ class App extends React.Component {
 
   }
 
-  //  getMapData = async (e) => {
+  handleWeather = async (e) => {
+    e.preventDefault();
 
-  //   try {
-  //     let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=11&size=600x600&format=jpeg`
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.city}`
 
-  //     this.setState({
-  //       cityMap: mapUrl,
-  //     })
-  //   } catch (error) {
-  //     console.log(error);
-  //     this.setState({
-  //       error: true,
-  //       errorMessage: error.message
-  //     })
-  //   }
+      let weatherData = await axios.get(url);
+
+      this.setState({
+        weatherData: weatherData.data,
+        showWeather: true
+      })
+
+    } catch (error) {
+      console.log(error.message);
+
+    }
+
+
+  }
+
+
+
+
 
 
 
@@ -97,8 +108,7 @@ class App extends React.Component {
                 <Card.Body>
                   <Card.Title>{this.state.errorMessage}</Card.Title>
                   <Card.Text>
-                    <p></p>
-                    <p></p>
+                    
                   </Card.Text>
 
                 </Card.Body>
@@ -108,8 +118,9 @@ class App extends React.Component {
                 <Card.Body>
                   <Card.Title>{this.state.cityData.display_name}</Card.Title>
                   <Card.Text>
-                    <p>Latitude: {this.state.cityData.lat}</p>
-                    <p>Longitude: {this.state.cityData.lon}</p>
+                    <div>Latitude: {this.state.cityData.lat}</div>
+
+                    <div>Longitude: {this.state.cityData.lon}</div>
                   </Card.Text>
 
                 </Card.Body>
