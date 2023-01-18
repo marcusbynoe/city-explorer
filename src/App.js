@@ -29,8 +29,11 @@ class App extends React.Component {
 
     try {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_API_KEY}&q=${this.state.city}&format=json&limit=1`
-
       let cityDataFromAxios = await axios.get(url)
+
+      let lat = cityDataFromAxios.data[0].lat;
+      let lon = cityDataFromAxios.data[0].lon;
+      
       console.log(cityDataFromAxios);
 
       this.setState({
@@ -54,14 +57,17 @@ class App extends React.Component {
 
   }
 
-  handleWeather = async (e) => {
-    e.preventDefault();
+  handleWeather = async (lat, lon) => {
+    // e.preventDefault();
 
     try {
-      let url = `${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.city}`
+      // BUILD URL
+      let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}&searchQuery=${this.state.city}`
 
+      // USE AXIOS TO HIT MY SERVER
       let weatherData = await axios.get(url);
 
+      // SAVE THAT WEATHER DATA TO STATE
       this.setState({
         weatherData: weatherData.data,
         showWeather: true
