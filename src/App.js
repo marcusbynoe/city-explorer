@@ -103,7 +103,7 @@ class App extends React.Component {
       <>
         <h1>API Location Calls</h1>
 
-        <body>
+        
 
           <form onSubmit={this.getCityData}>
             <label htmlFor="">Search for a City!
@@ -126,24 +126,25 @@ class App extends React.Component {
 
                 </Card.Body>
               </Card>
-              : <Card style={{ width: '18rem' }}>
+              : <>
+              <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={this.state.cityMap} alt="map" />
                 <Card.Body>
                   <Card.Title>{this.state.cityData.display_name}</Card.Title>
                   <Card.Text>
                     <ListGroup variant='flush'>
-                      
+
                       <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
                       <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
-                      <ListGroup.Item>weatherData={this.state.weatherData}</ListGroup.Item>
+                     
                       
                     </ListGroup>
                   </Card.Text>
 
                 </Card.Body>
               </Card>
-
-
+              <Weather weatherData={this.state.weatherData}/>
+              </>
             // <p>City: {this.state.cityData.display_name}</p>
             // <p>Latitude: {this.state.cityData.lat}</p>
             // <p>Longitude: {this.state.cityData.lon}</p>
@@ -153,7 +154,7 @@ class App extends React.Component {
 
           }
 
-        </body>
+       
 
 
 
