@@ -2,6 +2,8 @@ import './App.css';
 import axios from 'axios';
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import Weather from './Weather';
+import { ListGroup } from 'react-bootstrap';
 
 class App extends React.Component {
   constructor(props) {
@@ -33,7 +35,9 @@ class App extends React.Component {
 
       let lat = cityDataFromAxios.data[0].lat;
       let lon = cityDataFromAxios.data[0].lon;
-      
+
+      this.handleWeather(lat, lon);
+
       console.log(cityDataFromAxios);
 
       this.setState({
@@ -56,7 +60,7 @@ class App extends React.Component {
     }
 
   }
-
+  // DEFINE A WEATHER HANDLER TO RETRIEVE 
   handleWeather = async (lat, lon) => {
     // e.preventDefault();
 
@@ -65,17 +69,20 @@ class App extends React.Component {
       let url = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}&searchQuery=${this.state.city}`
 
       // USE AXIOS TO HIT MY SERVER
-      let weatherData = await axios.get(url);
+      let weatherDataFromAxios = await axios.get(url);
 
       // SAVE THAT WEATHER DATA TO STATE
       this.setState({
-        weatherData: weatherData.data,
-        showWeather: true
+        weatherData: weatherDataFromAxios.data,
+        // showWeather: true
       })
 
     } catch (error) {
       console.log(error.message);
-
+      this.setState({
+        error: true,
+        errorMessage: error.message
+      })
     }
 
 
@@ -114,7 +121,7 @@ class App extends React.Component {
                 <Card.Body>
                   <Card.Title>{this.state.errorMessage}</Card.Title>
                   <Card.Text>
-                    
+
                   </Card.Text>
 
                 </Card.Body>
@@ -124,13 +131,18 @@ class App extends React.Component {
                 <Card.Body>
                   <Card.Title>{this.state.cityData.display_name}</Card.Title>
                   <Card.Text>
-                    <div>Latitude: {this.state.cityData.lat}</div>
-
-                    <div>Longitude: {this.state.cityData.lon}</div>
+                    <ListGroup variant='flush'>
+                      
+                      <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
+                      <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
+                      <ListGroup.Item>weatherData={this.state.weatherData}</ListGroup.Item>
+                      
+                    </ListGroup>
                   </Card.Text>
 
                 </Card.Body>
               </Card>
+
 
             // <p>City: {this.state.cityData.display_name}</p>
             // <p>Latitude: {this.state.cityData.lat}</p>
