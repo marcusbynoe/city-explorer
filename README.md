@@ -28,4 +28,16 @@ Start time: 3:20pm
 
 Finish time: 8:39pm (took a dinner break)
 
-Actual time needed to complete: Incomplete
+Actual time needed to complete: Completed
+
+## Lab 08
+
+Name of feature: daily weather and movie API
+
+Estimate of time needed to complete: 3 hours
+
+Start time: 4:35pm
+
+Finish time: 10:12pm
+
+Actual time needed to complete: Incomplete.
