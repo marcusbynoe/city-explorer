@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Movie from './Movie';
 
 class Movies extends React.Component {
   render() {
@@ -9,9 +9,8 @@ class Movies extends React.Component {
         <h3>Movies</h3>
         <div>
           {this.props.movies.slice(0, 5).map((movie, idx) => (
-            <div key={idx}>
-              <p>Title: {movie.title}</p>
-              <p>Description: {movie.description}</p>
+            <div>
+              <Movie key={idx} movie={movie.movies} description={movie.description} />
               <img src={movie.image} alt={movie.title}/>
             </div>
           ))

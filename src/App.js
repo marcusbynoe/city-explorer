@@ -2,8 +2,8 @@ import './App.css';
 import axios from 'axios';
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Weather from './Weather';
-import Movies from './Movies';
+import Weather from './components/Weather';
+import Movies from './components/Movies';
 import { ListGroup } from 'react-bootstrap';
 
 class App extends React.Component {
