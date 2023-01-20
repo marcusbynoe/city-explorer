@@ -3,6 +3,7 @@ import axios from 'axios';
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Weather from './Weather';
+import Movies from './Movies';
 import { ListGroup } from 'react-bootstrap';
 
 class App extends React.Component {
@@ -15,7 +16,10 @@ class App extends React.Component {
       error: false,
       errorMessage: '',
       weatherData: [],
-      showWeather: false
+      showWeather: false,
+      movies: [],
+      movieError: false,
+      movieErrorMessage: ''
     }
   }
 
@@ -25,6 +29,11 @@ class App extends React.Component {
       city: e.target.value
     })
   }
+
+ 
+ callApis = () => {
+  this.getMovie();
+ }
 
   getCityData = async (e) => {
     e.preventDefault();
@@ -44,7 +53,7 @@ class App extends React.Component {
         cityData: cityDataFromAxios.data[0],
         error: false,
         cityMap: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_KEY}&center=${cityDataFromAxios.data[0].lat},${cityDataFromAxios.data[0].lon}&zoom=11&size=600x600&format=jpeg`
-      })
+      }, this.callApis)
 
 
 
@@ -88,7 +97,25 @@ class App extends React.Component {
 
   }
 
+  getMovie = async () => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.city}`
 
+      let moviesFromAxios = await axios.get(url);
+
+      this.setState({
+        movies: moviesFromAxios.data,
+        movieError: false,
+        movieErrorMessage: '',
+      })
+
+    } catch (error) {
+      this.setState({
+        movieError: true,
+        movieErrorMessage: error.message
+      })
+    }
+  }
 
 
 
@@ -103,30 +130,30 @@ class App extends React.Component {
       <>
         <h1>API Location Calls</h1>
 
-        
 
-          <form onSubmit={this.getCityData}>
-            <label htmlFor="">Search for a City!
-              <input type="text" onInput={this.handleInput} />
-              <button type='submit'>Explore</button>
-            </label>
-          </form>
 
-          {
+        <form onSubmit={this.getCityData}>
+          <label htmlFor="">Search for a City!
+            <input type="text" onInput={this.handleInput} />
+            <button type='submit'>Explore</button>
+          </label>
+        </form>
 
-            this.state.error
+        {
 
-              ? <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="" />
-                <Card.Body>
-                  <Card.Title>{this.state.errorMessage}</Card.Title>
-                  <Card.Text>
+          this.state.error
 
-                  </Card.Text>
+            ? <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src="" />
+              <Card.Body>
+                <Card.Title>{this.state.errorMessage}</Card.Title>
+                <Card.Text>
 
-                </Card.Body>
-              </Card>
-              : <>
+                </Card.Text>
+
+              </Card.Body>
+            </Card>
+            : <>
               <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={this.state.cityMap} alt="map" />
                 <Card.Body>
@@ -136,25 +163,26 @@ class App extends React.Component {
 
                       <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
                       <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
-                     
-                      
+
+
                     </ListGroup>
                   </Card.Text>
 
                 </Card.Body>
               </Card>
-              <Weather weatherData={this.state.weatherData}/>
-              </>
-            // <p>City: {this.state.cityData.display_name}</p>
-            // <p>Latitude: {this.state.cityData.lat}</p>
-            // <p>Longitude: {this.state.cityData.lon}</p>
-            // <img src={this.state.cityMap} alt='map' />
-            // ? <p>{this.state.errorMessage}</p>
-            // : <p>{this.state.cityData.display_name}</p>
+              <Weather weatherData={this.state.weatherData} />
+              <Movies movies={this.state.movies} />
+            </>
+          // <p>City: {this.state.cityData.display_name}</p>
+          // <p>Latitude: {this.state.cityData.lat}</p>
+          // <p>Longitude: {this.state.cityData.lon}</p>
+          // <img src={this.state.cityMap} alt='map' />
+          // ? <p>{this.state.errorMessage}</p>
+          // : <p>{this.state.cityData.display_name}</p>
 
-          }
+        }
 
-       
+
 
 
 
