@@ -1,13 +1,13 @@
 import React from 'react';
 
 class WeatherDay extends React.Component {
-  render(){
+  render() {
     return (
       <>
-      <div key={this.props.idx}>
-      <p>Date: {this.props.date}</p>
-      <p>Description: {this.props.description}</p>
-      </div>
+        <div>
+          <p>Date: {this.props.date}</p>
+          <p>Description: {this.props.description}</p>
+        </div>
       </>
 
     )

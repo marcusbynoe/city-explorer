@@ -30,10 +30,10 @@ class App extends React.Component {
     })
   }
 
- 
- callApis = () => {
-  this.getMovie();
- }
+
+  callApis = () => {
+    this.getMovie();
+  }
 
   getCityData = async (e) => {
     e.preventDefault();
@@ -153,20 +153,20 @@ class App extends React.Component {
 
               </Card.Body>
             </Card>
-            : <>
+            : 
+            <>
               <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={this.state.cityMap} alt="map" />
                 <Card.Body>
                   <Card.Title>{this.state.cityData.display_name}</Card.Title>
-                  <Card.Text>
-                    <ListGroup variant='flush'>
 
-                      <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
-                      <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
+                  <ListGroup variant='flush'>
+
+                    <ListGroup.Item>Latitude: {this.state.cityData.lat}</ListGroup.Item>
+                    <ListGroup.Item>Longitude: {this.state.cityData.lon}</ListGroup.Item>
 
 
-                    </ListGroup>
-                  </Card.Text>
+                  </ListGroup>
 
                 </Card.Body>
               </Card>
